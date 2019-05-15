@@ -1,0 +1,3 @@
+Running scheduled command: '/Applications/MAMP/bin/php/php7.2.8/bin/php' 'artisan' task_admin_demo_taskone > '/dev/null' 2>&1
+Running scheduled command: '/Applications/MAMP/bin/php/php7.2.8/bin/php' 'artisan' task_admin_demo_tasktwo > '/dev/null' 2>&1
+Running scheduled command: '/Applications/MAMP/bin/php/php7.2.8/bin/php' 'artisan' task_admin_demo_taskthree > '/dev/null' 2>&1
