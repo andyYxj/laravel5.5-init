@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Task\Admin\Demo;
 
+use App\Helps\LogHelper;
 use Illuminate\Console\Command;
 use App\Services\Cart\BusinessCartService;
 use Illuminate\Http\Request;
@@ -50,6 +51,11 @@ class TaskOne extends Command
     public function handle(Request $request)
     {
         //$this->line($this->service->list($request));
-        Log::info('我是1号任务，我一分钟执行一次');
+        //Log::info('我是1号任务，我一分钟执行一次');
+      /*  $monolog = Log::getMonolog();
+        $monolog->popHandler();
+        Log::useDailyFiles( storage_path().'/logs/single-log.log', 30 );
+        Log::info( 'single-log');*/
+        LogHelper::writeLocalLog('testlog','emergency');
     }
 }
