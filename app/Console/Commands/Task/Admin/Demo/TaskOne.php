@@ -56,6 +56,6 @@ class TaskOne extends Command
         $monolog->popHandler();
         Log::useDailyFiles( storage_path().'/logs/single-log.log', 30 );
         Log::info( 'single-log');*/
-        LogHelper::writeLocalLog('testlog','emergency');
+        LogHelper::writeLocalLog('testlog1213','info');
     }
 }

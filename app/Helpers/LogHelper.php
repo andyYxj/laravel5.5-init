@@ -16,17 +16,21 @@ class LogHelper
      * 支持 8种日志级别emergency、alert、critical、error、warning、 notice、info 和 debug
      * @param string $data
      * @param $logLevel
-     * @param int $days  表示最大保留几个文件，也即几天文件，设置为0 则不删除文件
-     * @param string $path  文件路径
-     * @param string $logName  文件名
+     * @param int $days 表示最大保留几个文件，也即几天文件，设置为0 则不删除文件
+     * @param string $path 文件路径
+     * @param string $logName 文件名
      */
-    public static function writeLocalLog($data = '', $logLevel, $days = 60, $path = '', $logName = '')
+    public static function writeLocalLog($data = '', $logLevel = '', $logDays = '', $logPath = '', $logName = '')
     {
-        $path    = $path ?: storage_path() . '/logs/';
-        $logName = $logName ?: 'single-log.log';
-        $monolog = Log::getMonolog();
+        $logPath  = $logPath ?: config('app.log_path');
+        $logName  = $logName ?: config('app.log_name');
+        $logDays  = $logDays ?: config('app.log_days');
+        $logLevel = $logLevel ?: config('app.log_level');
+        $a=$logPath . '/' . $logName;
+
+        $monolog  = Log::getMonolog();
         $monolog->popHandler();
-        Log::useDailyFiles($path . '/' . $logName, $days);
+        Log::useDailyFiles($logPath . '/' . $logName, $logDays);
         switch ($logLevel) {
             case 'emergency':
                 Log::emergency($data);

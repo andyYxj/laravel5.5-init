@@ -122,8 +122,13 @@ return [
     */
 
     'log' => env('APP_LOG', 'single'),
+    # 自定义 writeLocalLog函数 日志路径
+    'log_path' => env('APP_LOG_PATH', storage_path('logs')),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
+
+    'log_name' => env('APP_LOG_NAME', 'test-log'),
+    'log_days' => env('APP_LOG_DAYS', 60),
 
     /*
     |--------------------------------------------------------------------------
