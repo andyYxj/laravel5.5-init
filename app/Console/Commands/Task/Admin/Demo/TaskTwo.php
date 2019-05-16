@@ -4,6 +4,7 @@ namespace App\Console\Commands\Task\Admin\Demo;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use App\Helps\LogHelper;
 
 class TaskTwo extends Command
 {
@@ -39,6 +40,10 @@ class TaskTwo extends Command
     public function handle()
     {
        // $this->line('我是测试任务2号，我也是一分钟执行一次');
-        Log::info('我是2号任务，我一分钟执行一次');
+        //while(true){
+            LogHelper::writeLocalLog('我是2号任务，我一分钟执行一次,我自己偷偷的2s 跑一次，看看会不会挂','info');
+           // Log::info('我是2号任务，我一分钟执行一次,我自己偷偷的2s 跑一次，看看会不会挂');
+      //  }
+
     }
 }

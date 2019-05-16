@@ -39,8 +39,8 @@ PUSHER_APP_CLUSTER=mt1
 
 
 #日志根目录路径,名字，级别,保持时间
-APP_LOG_PATH=''
-APP_LOG_NAME=test-log
+APP_LOG_PATH='/Applications/MAMP/htdocs/laravel5.5-init/storage/logs'
+APP_LOG_NAME=test-log.log
 APP_LOG_LEVEL=debug
 APP_LOG_DAYS=60
 

@@ -39,6 +39,9 @@ class TaskThree extends Command
     public function handle()
     {
         //$this->line('我是测试任务2号，我5分钟执行一次');
+        $key_1=config('test.home.name');
+        $key_2=config('test.app_name_test');
+        $key_wechat=config('wechat.wechat.key');
         Log::info('我是3号任务，我5分钟执行一次');
     }
 }

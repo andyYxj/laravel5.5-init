@@ -16,8 +16,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        TaskOne::class,
         TaskTwo::class,
+        TaskOne::class,
         TaskThree::class,
     ];
 
