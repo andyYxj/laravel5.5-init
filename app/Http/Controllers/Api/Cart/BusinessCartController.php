@@ -61,7 +61,7 @@ class BusinessCartController extends MyController
             'num'             => 'required|integer',
         ];
         $res   = $this->validation($request, $rules, $this->fields);
-        if ($res['code'] == 500) {
+        if ($res['code'] != 200) {
             return json_encode($res);
         }
         return $this->service->add($request);
