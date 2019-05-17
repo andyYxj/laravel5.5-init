@@ -42,6 +42,7 @@ class TaskThree extends Command
         $key_1=config('test.home.name');
         $key_2=config('test.app_name_test');
         $key_wechat=config('wechat.wechat.key');
+        $key_super=config('superAdmin.superAdmin.key');
         Log::info('我是3号任务，我5分钟执行一次');
     }
 }

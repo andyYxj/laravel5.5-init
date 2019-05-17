@@ -26,7 +26,6 @@ class LogHelper
         $logName  = $logName ?: config('app.log_name');
         $logDays  = $logDays ?: config('app.log_days');
         $logLevel = $logLevel ?: config('app.log_level');
-        $a=$logPath . '/' . $logName;
 
         $monolog  = Log::getMonolog();
         $monolog->popHandler();
