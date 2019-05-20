@@ -71,8 +71,8 @@ class BusinessCartService extends BaseService
                 return $this->response('', '加入购物车失败', 500);
             }
 
-        } catch (\Exception $e) {
-            return $this->response($e->getMessage(), '新增(更新)购物车异常', 500);
+        } catch (\Throwable $t) {
+            return $this->response($t->getMessage(), '新增(更新)购物车异常', 500);
         }
 
     }
@@ -105,8 +105,8 @@ class BusinessCartService extends BaseService
                 return $this->response('', '购物车商品修改失败', 500);
             }
 
-        } catch (\Exception $e) {
-            return $this->response($e->getMessage(), '更新购物车异常', 500);
+        } catch (\Throwable $t) {
+            return $this->response($t->getMessage(), '更新购物车异常', 500);
         }
     }
 
@@ -129,8 +129,8 @@ class BusinessCartService extends BaseService
                 return $this->response('', '购物车商品删除成功');
             }
 
-        } catch (\Exception $e) {
-            return $this->response('', '购物车商品删除异常');
+        } catch (\Throwable $t) {
+            return $this->response($t->getMessage(), '购物车商品删除异常',500);
         }
 
     }
@@ -152,8 +152,8 @@ class BusinessCartService extends BaseService
 
             return $this->response($res, '查询成功');
 
-        } catch (\Exception $e) {
-            return $this->response($e->getMessage(), '查询失败', 500);
+        } catch (\Throwable $t) {
+            return $this->response($t->getMessage(), '查询失败', 500);
         }
     }
 

@@ -73,7 +73,7 @@ class MyController  extends Controller
             }
             return $this->responseArray('', '验证通过', 200);
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $t) {
             return $this->responseArray('', '验证异常', 505);
         }
 
