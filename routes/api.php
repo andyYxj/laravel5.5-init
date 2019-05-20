@@ -28,3 +28,11 @@ Route::group(['prefix' => 'sellerAdmin', 'middleware' => 'checkApiToken'], funct
     Route::match(['get', 'post'], 'business/cart/list', 'Api\Cart\BusinessCartController@list')->name('business/cart/list');// 商家 订货订单 购物车列表
 
 });
+
+
+//超管后台
+Route::group(['prefix' => 'superAdmin', 'middleware' => 'checkApiToken'], function () {
+    //测试相关
+    Route::match(['get', 'post'], 'test/router/index', 'Api\SuperAdmin\TestController@index')->name('business/cart/add');//测试
+
+});
