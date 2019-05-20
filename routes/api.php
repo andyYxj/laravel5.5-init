@@ -33,6 +33,6 @@ Route::group(['prefix' => 'sellerAdmin', 'middleware' => 'checkApiToken'], funct
 //超管后台
 Route::group(['prefix' => 'superAdmin', 'middleware' => 'checkApiToken'], function () {
     //测试相关
-    Route::match(['get', 'post'], 'test/router/index', 'Api\SuperAdmin\TestController@index')->name('business/cart/add');//测试
+    Route::match(['get', 'post'], 'test/router/index', 'Api\SuperAdmin\TestController@index')->name('test/router/inde');//测试
 
 });
