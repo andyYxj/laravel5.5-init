@@ -36,3 +36,15 @@ Route::group(['prefix' => 'superAdmin', 'middleware' => 'checkApiToken'], functi
     Route::match(['get', 'post'], 'test/router/index', 'Api\SuperAdmin\TestController@index')->name('test/router/inde');//测试
 
 });
+
+
+//角色权限测试路由
+Route::group(['prefix' => 'role'], function () {
+    Route::match(['get', 'post'], 'test/role/addRole', 'Api\SuperAdmin\TestController@addRole')->name('test/router/addRole');//增加角色
+    Route::match(['get', 'post'], 'test/role/addPermissionToRole', 'Api\SuperAdmin\TestController@addPermissionToRole')->name('test/router/addPermissionToRole');//把权限赋值给角色
+    Route::match(['get', 'post'], 'test/role/attachRolesToUser', 'Api\SuperAdmin\TestController@attachRolesToUser')->name('test/router/attachRolesToUser');//给用户附加角色
+    Route::match(['get', 'post'], 'test/role/removeRoleFromUser', 'Api\SuperAdmin\TestController@removeRoleFromUser')->name('test/router/removeRoleFromUser');//移除用户的角色
+    Route::match(['get', 'post'], 'test/role/userHasRole', 'Api\SuperAdmin\TestController@userHasRole')->name('test/router/userHasRole');//判断一个用户是否有某个角色
+    Route::match(['get', 'post'], 'test/role/roleHasPermission', 'Api\SuperAdmin\TestController@roleHasPermission')->name('test/router/roleHasPermission');//判断一个用户是否有某个角色
+
+});
