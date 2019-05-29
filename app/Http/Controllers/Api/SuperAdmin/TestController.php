@@ -39,21 +39,8 @@ class TestController extends MyController
     }
 
 
-    //###########################角色为主的接口  begin #########################
-    //创建角色
-    public function createRole(Request $request)
-    {
-        return $this->service->createRole($request);
-    }
 
-    /**
-     * 删除角色本身
-     * @param Request $request
-     * @return string
-     */
-    public function removeRole(Request $request){
-         return $this->service->removeRole($request);
-    }
+
 
     /**
      * 给一个角色添加一个权限
@@ -65,13 +52,7 @@ class TestController extends MyController
         return $this->service->attachPermissionToRole($request);
     }
 
-    /**
-     * 新增独立的权限数据，用于权限数据的初始录入
-     * @param Request $request
-     */
-    public function addPermissions(Request $request){
-        return $this->service->addPermissions($request);
-    }
+
 
     /**
      * 给一个角色同步多个权限，会删除原先角色所有的权限，以当前同步的为准
@@ -90,12 +71,6 @@ class TestController extends MyController
         return $this->service->roleHasPermission($request);
     }
 
-    //###########################角色为主的接口  end #########################
-
-
-
-
-   //###########################用户为主的接口  begin ################
     /**
      * 给用户关联角色
      * @param Request $request

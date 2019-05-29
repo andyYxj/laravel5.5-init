@@ -1,0 +1,122 @@
+<?php
+/**
+ * Created by yuxianjun001@icloud.com.
+ * User: wuchen
+ * Date: 2019/5/29
+ * Time: 14:53
+ */
+
+namespace App\Http\Controllers\Api\SuperAdmin;
+
+
+use App\Http\Controllers\Common\MyController;
+use App\Models\UserModel\UserModel;
+use App\Services\Common\RolePermissionService;
+use Illuminate\Http\Request;
+
+class UserRolePermissionController extends MyController
+{
+    private $service;
+    private $request;
+
+    public function __construct(Request $request)
+    {
+        //guardName 字段 做为权限组的标识，按照模块来，基本原则为如果需要，将超管，b端，c端分别做不同的guardName划分，规定为：超管后台的super_admin,b端后台的位b_admin,c端的为c_admin
+        //不同的控制器对应不同的guardName，调用的服务层代码一致
+        $request->guardName = 'super_admin';
+        $this->request      = $request;
+        $this->service      = new RolePermissionService($request);
+    }
+
+    //###################用户-角色相关  begin##############
+    /**
+     * 给用户关联角色
+     * @param Request $request
+     * @return mixed
+     */
+    public function attachRolesToUser()
+    {
+        return $this->service->attachRolesToUser($this->request);
+    }
+
+    /**
+     * role 为角色的名称，不是id
+     * 取消角色跟用户的关联，一个个删除
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeRoleFromUser(){
+        return $this->service->removeRoleFromUser($this->request);
+    }
+
+    /**
+     * 给用户同期角色（会删除用户之前所有角色信息）
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function syncRolesToUser(){
+        return $this->service->syncRolesToUser($this->request);
+    }
+
+    /**判断一个用户是否有指定的角色
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function userHasRole(){
+        return $this->service->userHasRole($this->request);
+    }
+
+    /**
+     * 判断一个用户是否包含给出的角色中的任何一个
+     */
+    public function userHasAnyRole(){
+        return $this->service->userHasAnyRole($this->request);
+    }
+
+    /**
+     * 判断一个用户是否包含给出的角色中的所有角色
+     */
+    public function userHasAllRoles(){
+        return $this->service->userHasAllRoles($this->request);
+    }
+    //###################用户-角色相关  end##############
+
+
+    //##################角色-权限相关 begin#####################
+
+    /**
+     *新增一个权限同时赋值给一个角色
+     * @return string
+     */
+    public function attachPermissionToRole(){
+        return $this->service->attachPermissionToRole($this->request);
+    }
+
+    /**
+     *把一个或者多个已经存在的权限赋值给一个角色
+     */
+    public function attachPermissionsToRole(){
+        return $this->service->attachPermissionsToRole($this->request);
+    }
+
+    /**
+     * 解绑一个角色上的一个权限
+     * @return mixed
+     */
+    public function revokePermissionFromRole(){
+        return $this->service->revokePermissionFromRole($this->request);
+    }
+
+    //##################角色-权限相关end#####################
+
+    //##################用户-角色-权限相关 begin###################
+
+    public function listPermissionsViaRoles(){
+
+    }
+
+    //##################用户-角色-权限相关 end###################
+
+
+
+
+
+
+}
