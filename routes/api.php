@@ -54,10 +54,19 @@ Route::group(['prefix' => 'role'], function () {
 
 //超管后台 角色权限测试路由
 Route::group(['prefix' => 'superRole'], function () {
-    Route::match(['get', 'post'], 'super/admin/user/role/add', 'Api\SuperAdmin\UserController@add')->name('super/admin/user/role/add');//增加角色
-    Route::match(['get', 'post'], 'super/admin/user/role/info', 'Api\SuperAdmin\UserController@info')->name('super/admin/user/role/info');//角色详情
-    Route::match(['get', 'post'], 'super/admin/user/role/del', 'Api\SuperAdmin\UserController@del')->name('super/admin/user/role/del');//删除角色
-    Route::match(['get', 'post'], 'super/admin/user/role/edit', 'Api\SuperAdmin\UserController@edit')->name('super/admin/user/role/edit');//编辑角色
-    Route::match(['get', 'post'], 'super/admin/user/role/list', 'Api\SuperAdmin\UserController@list')->name('super/admin/user/role/list');//角色列表，包含搜索
+
+    //角色模块
+    Route::match(['get', 'post'], 'super/admin/user/role/add', 'Api\SuperAdmin\UserRoleController@add')->name('super/admin/user/role/add');//增加角色
+    Route::match(['get', 'post'], 'super/admin/user/role/info', 'Api\SuperAdmin\UserRoleController@info')->name('super/admin/user/role/info');//角色详情
+    Route::match(['get', 'post'], 'super/admin/user/role/del', 'Api\SuperAdmin\UserRoleController@del')->name('super/admin/user/role/del');//删除角色
+    Route::match(['get', 'post'], 'super/admin/user/role/edit', 'Api\SuperAdmin\UserRoleController@edit')->name('super/admin/user/role/edit');//编辑角色
+    Route::match(['get', 'post'], 'super/admin/user/role/list', 'Api\SuperAdmin\UserRoleController@list')->name('super/admin/user/role/list');//角色列表，包含搜索
+
+    //权限模块
+    Route::match(['get', 'post'], 'super/admin/user/permission/add', 'Api\SuperAdmin\UserPermissionController@add')->name('super/admin/user/permission/add');//增加角色
+    Route::match(['get', 'post'], 'super/admin/user/permission/info', 'Api\SuperAdmin\UserPermissionController@info')->name('super/admin/user/permission/info');//角色详情
+    Route::match(['get', 'post'], 'super/admin/user/permission/del', 'Api\SuperAdmin\UserPermissionController@del')->name('super/admin/user/permission/del');//删除角色
+    Route::match(['get', 'post'], 'super/admin/user/permission/edit', 'Api\SuperAdmin\UserPermissionController@edit')->name('super/admin/user/permission/edit');//编辑角色
+    Route::match(['get', 'post'], 'super/admin/user/permission/list', 'Api\SuperAdmin\UserPermissionController@list')->name('super/admin/user/permission/list');//角色列表，包含搜索
 
 });

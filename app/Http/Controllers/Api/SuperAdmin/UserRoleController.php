@@ -13,7 +13,7 @@ use App\Http\Controllers\Common\MyController;
 use App\Services\Common\RoleService;
 use Illuminate\Http\Request;
 
-class UserController extends MyController
+class UserRoleController extends MyController
 {
     private $service;
     private $request;
