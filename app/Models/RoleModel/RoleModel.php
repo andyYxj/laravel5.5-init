@@ -23,6 +23,5 @@ class RoleModel extends Role
 {
     use ModelTrait;
     protected $table='roles';
-    protected $guard_name = 'superadmin_api';
 
 }

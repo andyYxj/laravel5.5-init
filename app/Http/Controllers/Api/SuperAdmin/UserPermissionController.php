@@ -28,12 +28,45 @@ class UserPermissionController extends MyController
     }
 
     /**
-     * 新增角色
+     * 新增权限
      * @return \Illuminate\Http\JsonResponse
      */
     public function add()
     {
         return $this->service->add($this->request);
+    }
+
+
+    /**
+     * 删除权限
+     */
+    public function del()
+    {
+        return $this->service->del($this->request);
+    }
+
+    /**
+     * 编辑权限
+     */
+    public function edit()
+    {
+        return $this->service->edit($this->request);
+    }
+
+    /**
+     * 权限详情
+     */
+    public function info()
+    {
+        return $this->service->info($this->request);
+    }
+
+    /**
+     * 权限列表
+     */
+    public function list()
+    {
+        return $this->service->list($this->request);
     }
 
 }

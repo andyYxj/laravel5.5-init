@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\DB;
  */
 class RoleService extends BaseService
 {
-    use ModelTrait;
     private $model;
 
     public function __construct()
