@@ -192,13 +192,30 @@ class RolePermissionService extends BaseService
 
     }
 
+    /**
+     * 获取一个用户的所有角色下的所有权限(结果会有分类标识)
+     * @param $request
+     */
+    public function listUserPermissionsViaRoles($request)
+    {
+        try {
+            $user        = UserModel::find($request->uid);
+            $permissions = $user->getPermissionsViaRoles();
+            return $this->response($permissions, '获取用户角色下的权限成功', 200);
+        } catch (\Throwable $t) {
+            return $this->response($t->getMessage(), '获取用户角色下的权限异常', 500);
+        }
+
+    }
+
 
     /**
+     * 给一个角色赋予(同步)多个权限，会删除原先角色所有的权限，以当前同步的为准
      * $request->permissions，可以为 string|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection
      * 如果是int 则采用findById方式，如果是字符串，则是findByName，如果是数组 findByName
      * 权限格式支持的实际方式包括 26或者[26,27],或者'test路由'或者['test路由'，'test路由2']，此处统一采用[26,27]
      * 参考 HasPermission中 getStoredPermission（）
-     * 给一个角色赋予(同步)多个权限，会删除原先角色所有的权限，以当前同步的为准
+     *
      * @param $request
      * @return string
      */
@@ -207,7 +224,7 @@ class RolePermissionService extends BaseService
         DB::beginTransaction();
         try {
             $role = Role::where('id', '=', $request->roleId)->firstOrFail();
-            $res  = $role->syncPermissions(json_decode($request->permissions));
+            $role->syncPermissions(json_decode($request->permissions));
             DB::commit();
             return $this->response('', '同步角色的权限成功', 200);
 
@@ -219,18 +236,20 @@ class RolePermissionService extends BaseService
 
 
     /**
+     * 判断某个角色是否有某个权限
      * @param $request
      */
     public function roleHasPermission($request)
     {
         try {
             $role = Role::where('id', '=', $request->roleId)->firstOrFail();
-            $role->hasPermissionTo($request->permission);
+            $res  = $role->hasPermissionTo($request->permission);
+            if ($res) {
+                return $this->response('', '角色拥有该权限', 200);
+            }
         } catch (\Throwable  $t) {
             return $this->response($t->getMessage(), '判断异常', 500);
         }
-
     }
-
 
 }

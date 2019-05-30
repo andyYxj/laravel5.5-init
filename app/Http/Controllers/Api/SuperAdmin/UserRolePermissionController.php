@@ -29,6 +29,7 @@ class UserRolePermissionController extends MyController
     }
 
     //###################用户-角色相关  begin##############
+
     /**
      * 给用户关联角色
      * @param Request $request
@@ -44,7 +45,8 @@ class UserRolePermissionController extends MyController
      * 取消角色跟用户的关联，一个个删除
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeRoleFromUser(){
+    public function removeRoleFromUser()
+    {
         return $this->service->removeRoleFromUser($this->request);
     }
 
@@ -52,28 +54,32 @@ class UserRolePermissionController extends MyController
      * 给用户同期角色（会删除用户之前所有角色信息）
      * @return \Illuminate\Http\JsonResponse
      */
-    public function syncRolesToUser(){
+    public function syncRolesToUser()
+    {
         return $this->service->syncRolesToUser($this->request);
     }
 
     /**判断一个用户是否有指定的角色
      * @return \Illuminate\Http\JsonResponse
      */
-    public function userHasRole(){
+    public function userHasRole()
+    {
         return $this->service->userHasRole($this->request);
     }
 
     /**
      * 判断一个用户是否包含给出的角色中的任何一个
      */
-    public function userHasAnyRole(){
+    public function userHasAnyRole()
+    {
         return $this->service->userHasAnyRole($this->request);
     }
 
     /**
      * 判断一个用户是否包含给出的角色中的所有角色
      */
-    public function userHasAllRoles(){
+    public function userHasAllRoles()
+    {
         return $this->service->userHasAllRoles($this->request);
     }
     //###################用户-角色相关  end##############
@@ -85,14 +91,16 @@ class UserRolePermissionController extends MyController
      *新增一个权限同时赋值给一个角色
      * @return string
      */
-    public function attachPermissionToRole(){
+    public function attachPermissionToRole()
+    {
         return $this->service->attachPermissionToRole($this->request);
     }
 
     /**
      *把一个或者多个已经存在的权限赋值给一个角色
      */
-    public function attachPermissionsToRole(){
+    public function attachPermissionsToRole()
+    {
         return $this->service->attachPermissionsToRole($this->request);
     }
 
@@ -100,23 +108,40 @@ class UserRolePermissionController extends MyController
      * 解绑一个角色上的一个权限
      * @return mixed
      */
-    public function revokePermissionFromRole(){
+    public function revokePermissionFromRole()
+    {
         return $this->service->revokePermissionFromRole($this->request);
+    }
+
+    /**给一个角色赋予(同步)多个权限，会删除原先角色所有的权限，以当前同步的为准
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function syncPermissionsToRole()
+    {
+        return $this->service->syncPermissionsToRole($this->request);
+    }
+
+    /**
+     *判断某个角色是否有某个权限
+     */
+    public function roleHasPermission()
+    {
+        return $this->service->roleHasPermission($this->request);
     }
 
     //##################角色-权限相关end#####################
 
     //##################用户-角色-权限相关 begin###################
 
-    public function listPermissionsViaRoles(){
-
+    /**
+     * 获取一个用户的所有角色下的所有权限(结果会有分类标识)
+     */
+    public function listUserPermissionsViaRoles()
+    {
+        return $this->service->listUserPermissionsViaRoles($this->request);
     }
 
     //##################用户-角色-权限相关 end###################
-
-
-
-
 
 
 }

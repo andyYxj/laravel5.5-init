@@ -52,7 +52,7 @@ Route::group(['prefix' => 'role'], function () {
 });
 
 
-//超管后台 角色权限测试路由
+//超管后台 角色权限测试路由(说明：所有权限不得直接赋值给用户，必须赋值给角色，尽管插件支持对用户直接赋值权限)
 Route::group(['prefix' => 'superRole'], function () {
 
     //角色模块
@@ -81,7 +81,12 @@ Route::group(['prefix' => 'superRole'], function () {
     Route::match(['get', 'post'], 'super/admin/user/role/attachPermissionToRole', 'Api\SuperAdmin\UserRolePermissionController@attachPermissionToRole')->name('super/admin/user/role/attachPermissionToRole');//新增一个权限同时赋值给一个角色
     Route::match(['get', 'post'], 'super/admin/user/role/attachPermissionsToRole', 'Api\SuperAdmin\UserRolePermissionController@attachPermissionsToRole')->name('super/admin/user/role/attachPermissionsToRole');//把一个或者多个已经存在的权限赋值给一个角色
     Route::match(['get', 'post'], 'super/admin/user/role/revokePermissionFromRole', 'Api\SuperAdmin\UserRolePermissionController@revokePermissionFromRole')->name('super/admin/user/role/revokePermissionFromRole');//解绑一个角色上的一个权限
+    Route::match(['get', 'post'], 'super/admin/user/role/syncPermissionsToRole', 'Api\SuperAdmin\UserRolePermissionController@syncPermissionsToRole')->name('super/admin/user/role/syncPermissionsToRole');//给一个角色赋予(同步)多个权限，会删除原先角色所有的权限，以当前同步的为准
+    Route::match(['get', 'post'], 'super/admin/user/role/roleHasPermission', 'Api\SuperAdmin\UserRolePermissionController@roleHasPermission')->name('super/admin/user/role/roleHasPermission');//判断某个角色是否有某个权限?
 
+
+    //用户-角色-权限
+    Route::match(['get', 'post'], 'super/admin/user/role/listUserPermissionsViaRoles', 'Api\SuperAdmin\UserRolePermissionController@listUserPermissionsViaRoles')->name('super/admin/user/role/listPermissionsViaRoles');//获取一个用户的所有角色下的所有权限(结果会有分类标识)
 
 
 });

@@ -81,7 +81,7 @@ class PermissionService extends BaseService
     public function info($request)
     {
         try {
-            if (is_numeric($request->permission)) {
+            if (is_int($request->permission)) {
                 $role = Permission::findById($request->permission, $request->guardName);
             } else {
                 $role = Permission::findByName($request->permission, $request->guardName);
