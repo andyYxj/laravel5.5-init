@@ -31,9 +31,9 @@ Route::group(['prefix' => 'sellerAdmin', 'middleware' => 'checkApiToken'], funct
 
 
 //超管后台
-Route::group(['prefix' => 'superAdmin', 'middleware' => 'checkApiToken'], function () {
+Route::group(['prefix' => 'superAdmin', 'middleware'=>'rolePermission'], function () {
     //测试相关
-    Route::match(['get', 'post'], 'test/router/index', 'Api\SuperAdmin\TestController@index')->name('test/router/inde');//测试
+    Route::match(['get', 'post'], 'test/router/index', 'Api\SuperAdmin\TestController@index')->name('test/router/index');//测试
 
 });
 
@@ -87,6 +87,7 @@ Route::group(['prefix' => 'superRole'], function () {
 
     //用户-角色-权限
     Route::match(['get', 'post'], 'super/admin/user/role/listUserPermissionsViaRoles', 'Api\SuperAdmin\UserRolePermissionController@listUserPermissionsViaRoles')->name('super/admin/user/role/listPermissionsViaRoles');//获取一个用户的所有角色下的所有权限(结果会有分类标识)
+    Route::match(['get', 'post'], 'super/admin/user/role/userHasPermissionThoughRole', 'Api\SuperAdmin\UserRolePermissionController@userHasPermissionThoughRole')->name('super/admin/user/role/userHasPermissionThoughRole');//获取一个用户的所有角色下的所有权限(结果会有分类标识)
 
 
 });

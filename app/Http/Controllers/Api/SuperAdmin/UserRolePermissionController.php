@@ -141,6 +141,10 @@ class UserRolePermissionController extends MyController
         return $this->service->listUserPermissionsViaRoles($this->request);
     }
 
+    public function userHasPermissionThoughRole(){
+        return $this->service->userHasPermissionThoughRole($this->request);
+    }
+
     //##################用户-角色-权限相关 end###################
 
 

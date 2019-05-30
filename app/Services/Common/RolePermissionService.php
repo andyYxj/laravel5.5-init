@@ -247,6 +247,24 @@ class RolePermissionService extends BaseService
             if ($res) {
                 return $this->response('', '角色拥有该权限', 200);
             }
+            return $this->response('', '角色没有该权限', 200);
+
+        } catch (\Throwable  $t) {
+            return $this->response($t->getMessage(), '判断异常', 500);
+        }
+    }
+
+    public function userHasPermissionThoughRole($request)
+    {
+        try {
+            //$role = Role::where('id', '=', $request->roleId)->firstOrFail();
+            $user = UserModel::findOrFail($request->uid);
+            $res  = $user->hasPermissionTo($request->permission, $request->guardName);
+            if ($res) {
+                return $this->response('', '用户拥有该权限', 200);
+            }
+            return $this->response('', '用户没有该权限', 404);
+
         } catch (\Throwable  $t) {
             return $this->response($t->getMessage(), '判断异常', 500);
         }

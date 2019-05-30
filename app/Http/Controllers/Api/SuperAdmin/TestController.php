@@ -19,12 +19,14 @@ class TestController extends MyController
     public $service;
     public function __construct()
     {
-        $this->service = new RolePermissionService();
+       // $this->service = new RolePermissionService();
     }
 
     public function index(Request $request)
     {
 
+        echo 111;
+        die;
         $a = Request::getRequestUri();//完整路由
         $b = app('router')->getRoutes();//获取所有路由1
         $c = Route::getRoutes();//获取所有路由2
