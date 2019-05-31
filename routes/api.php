@@ -31,7 +31,7 @@ Route::group(['prefix' => 'sellerAdmin', 'middleware' => 'checkApiToken'], funct
 
 
 //超管后台
-Route::group(['prefix' => 'superAdmin', 'middleware'=>'rolePermission'], function () {
+Route::group(['prefix' => 'superAdmin', 'middleware'=>'superAdmin.rolePermission'], function () {
     //测试相关
     Route::match(['get', 'post'], 'test/router/index', 'Api\SuperAdmin\TestController@index')->name('test/router/index');//测试
 

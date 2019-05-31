@@ -58,6 +58,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'checkApiToken' => \App\Http\Middleware\CheckApiToken::class,//接口安全性token验证
-        'rolePermission'=>\App\Http\Middleware\SuperAdmin\VerifyPermissions::class,//权限角色检查
+        'superAdmin.rolePermission'=>\App\Http\Middleware\SuperAdmin\VerifyPermissions::class,//权限角色检查
     ];
 }
