@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Api\SuperAdmin\RolePermission;
 
 
 use App\Http\Controllers\Common\MyController;
-use App\Services\Common\RoleService;
+use App\Services\Common\RolePermission\RoleService;
 use Illuminate\Http\Request;
 
 class UserRoleController extends MyController

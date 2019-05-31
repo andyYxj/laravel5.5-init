@@ -6,7 +6,7 @@
  * Time: 10:12
  */
 
-namespace App\Services\Common;
+namespace App\Services\Common\RolePermission;
 
 
 use App\Services\BaseService;

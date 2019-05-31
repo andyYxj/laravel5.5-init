@@ -6,7 +6,7 @@
  * Time: 17:43
  */
 
-namespace App\Services\Common;
+namespace App\Services\Common\RolePermission;
 
 
 use App\Models\PermissionModel\PermissionModel;

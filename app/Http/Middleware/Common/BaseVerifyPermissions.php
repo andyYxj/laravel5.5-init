@@ -8,7 +8,7 @@
 
 namespace App\Http\Middleware\Common;
 
-use App\Services\Common\RolePermissionService;
+use App\Services\Common\RolePermission\RolePermissionService;
 use App\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Route;
 use Closure;
