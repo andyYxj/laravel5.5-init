@@ -22,8 +22,8 @@ class UserRolePermissionController extends MyController
     {
         //guardName 字段 做为权限组的标识，按照模块来，基本原则为如果需要，将超管，b端，c端分别做不同的guardName划分，规定为：超管后台的super_admin,b端后台的位b_admin,c端的为c_admin
         //不同的控制器对应不同的guardName，调用的服务层代码一致
-        $request->guardName = 'super_admin';
-        $request->node="SuperAdmin";//该node为 Models/UserModel/下的模块名称，其他的模块可能为BAdmin，CAdmin，然后在目录下建立同名的UserModel，只能为UserModel
+        $request->guardName = config('permission.super_admin');
+        $request->node      = "SuperAdmin";//该node为 Models/UserModel/下的模块名称，其他的模块可能为BAdmin，CAdmin，然后在目录下建立同名的UserModel，只能为UserModel
         $this->request      = $request;
         $this->service      = new RolePermissionService($request);
     }
@@ -145,7 +145,8 @@ class UserRolePermissionController extends MyController
      * 用户是否含有指定角色下的权限
      * @return \Illuminate\Http\JsonResponse
      */
-    public function userHasPermissionThoughRole(){
+    public function userHasPermissionThoughRole()
+    {
         return $this->service->userHasPermissionThoughRole($this->request);
     }
 

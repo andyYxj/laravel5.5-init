@@ -23,9 +23,9 @@ class UserRoleController extends MyController
     {
         //该字段 做为权限组的标识，按照模块来，基本原则为如果需要，将超管，b端，c端分别做不同的guardName划分，规定为：超管后台的super_admin,b端后台的位b_admin,c端的为c_admin
         //不同的控制器对应不同的guardName，调用的服务层代码一致
-        $request->guardName = 'super_admin';
+        $request->guardName = config('permission.super_admin');
         $this->request      = $request;
-        $this->service = new RoleService();
+        $this->service      = new RoleService();
     }
 
     /**
@@ -41,14 +41,16 @@ class UserRoleController extends MyController
      * 删除角色本身,支持通过角色id批量删除，入参为json数组
      * @return string
      */
-    public function del(){
+    public function del()
+    {
         return $this->service->del($this->request);
     }
 
     /**
      * 编辑角色
      */
-    public function edit(){
+    public function edit()
+    {
         return $this->service->edit($this->request);
     }
 
@@ -56,14 +58,16 @@ class UserRoleController extends MyController
      * 角色详情
      * @return string
      */
-    public function info(){
+    public function info()
+    {
         return $this->service->info($this->request);
     }
 
     /**
      * 角色列表
      */
-    public function list(){
+    public function list()
+    {
         return $this->service->list($this->request);
     }
 

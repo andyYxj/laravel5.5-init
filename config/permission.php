@@ -92,7 +92,7 @@ return [
 
     'display_permission_in_exception' => false,
 
-    'cache' => [
+    'cache'      => [
 
         /*
          * By default all permissions are cached for 24 hours to speed up performance.
@@ -125,5 +125,12 @@ return [
          */
 
         'store' => 'default',
+    ],
+
+    //自定义的guard_name配置，支持多权限系统
+    'guard_name' => [
+        'super_admin' => 'super_admin',//超管后台
+        'b_admin'     => 'b_admin',//b端
+        'c_admin'     => 'c_admin'//c端
     ],
 ];

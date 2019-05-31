@@ -22,7 +22,7 @@ class UserPermissionController extends MyController
     {
         //该字段 做为权限组的标识，按照模块来，基本原则为如果需要，将超管，b端，c端分别做不同的guardName划分，规定为：超管后台的super_admin,b端后台的位b_admin,c端的为c_admin
         //不同的控制器对应不同的guardName，调用的服务层代码一致
-        $request->guardName = 'super_admin';
+        $request->guardName = config('permission.super_admin');
         $this->request      = $request;
         $this->service      = new PermissionService();
     }
