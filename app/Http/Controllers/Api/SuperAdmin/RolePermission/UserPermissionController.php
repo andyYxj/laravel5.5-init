@@ -6,7 +6,7 @@
  * Time: 13:41
  */
 
-namespace App\Http\Controllers\Api\SuperAdmin;
+namespace App\Http\Controllers\Api\SuperAdmin\RolePermission;
 
 
 use App\Http\Controllers\Common\MyController;
