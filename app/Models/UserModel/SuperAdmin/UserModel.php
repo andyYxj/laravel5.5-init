@@ -13,9 +13,7 @@ use App\Models\UserModel\BaseUserModel;
 
 class UserModel extends BaseUserModel
 {
-   // use  HasRoles,Notifiable;
-
-    public $table='users';
+    public $table = 'users';
     public $guard_name = 'super_admin';
 
 }
