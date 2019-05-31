@@ -9,7 +9,6 @@
 namespace App\Services\Common;
 
 
-use App\Models\UserModel\UserModel;
 use App\Services\BaseService;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -18,11 +17,11 @@ use Illuminate\Support\Facades\DB;
 
 class RolePermissionService extends BaseService
 {
-    protected $userModelName;
+    public $userModel;
 
     public function __construct($request)
     {
-        $this->userModelName = $request->userModelName;
+        $this->userModel="\App\Models\UserModel\\".$request->node."\UserModel";
     }
 
     /**
@@ -34,11 +33,11 @@ class RolePermissionService extends BaseService
     public function attachRolesToUser($request)
     {
         try {
-            $user = UserModel::find($request->uid);//不同的userModel需要使用不同的Model，重写一个方法
+            $user =  $this->userModel::findOrFail($request->uid);//不同的userModel需要使用不同的Model，重写一个方法
             $user->assignRole(json_decode($request->roles));
-            return $this->response('', '关联用户成功', 200);
+            return $this->response('', '给用户关联角色成功', 200);
         } catch (\Throwable $t) {
-            return $this->response($t->getMessage(), '关联角色异常', 500);
+            return $this->response($t->getMessage(), '给用户关联角色异常', 500);
         }
     }
 
@@ -51,7 +50,7 @@ class RolePermissionService extends BaseService
     public function removeRoleFromUser($request)
     {
         try {
-            $user = UserModel::find($request->uid);
+            $user = $this->userModel::findOrFail($request->uid);
             $user->removeRole($request->role);
             return $this->response('', '移除用户角色成功', 200);
 
@@ -69,7 +68,7 @@ class RolePermissionService extends BaseService
     public function syncRolesToUser($request)
     {
         try {
-            $user = UserModel::find($request->uid);
+            $user = $this->userModel::findOrFail($request->uid);
             $user->syncRoles(json_decode($request->roles));
             return $this->response('', '同步角色给用户成功', 200);
         } catch (\Throwable $t) {
@@ -85,7 +84,7 @@ class RolePermissionService extends BaseService
     public function userHasRole($request)
     {
         try {
-            $user = UserModel::find($request->uid);
+            $user = $this->userModel::findOrFail($request->uid);
             $res  = $user->hasRole($request->role);
             if ($res) {
                 return $this->response('', '用户拥有该角色', 200);
@@ -105,7 +104,7 @@ class RolePermissionService extends BaseService
     public function userHasAnyRole($request)
     {
         try {
-            $user = UserModel::find($request->uid);
+            $user = $this->userModel::findOrFail($request->uid);
             $role = $user->hasAnyRole(json_decode($request->roles));
             if ($role) {
                 return $this->response('', '至少含有列表中角色的一个', 200);
@@ -125,7 +124,7 @@ class RolePermissionService extends BaseService
     public function userHasAllRoles($request)
     {
         try {
-            $user = UserModel::find($request->uid);
+            $user = $this->userModel::findOrFail($request->uid);
             $role = $user->hasAllRoles(json_decode($request->roles));
             if ($role) {
                 return $this->response('', '用户含有列表中所有角色', 200);
@@ -199,7 +198,7 @@ class RolePermissionService extends BaseService
     public function listUserPermissionsViaRoles($request)
     {
         try {
-            $user        = UserModel::find($request->uid);
+            $user        = $this->userModel::findOrFail($request->uid);
             $permissions = $user->getPermissionsViaRoles();
             return $this->response($permissions, '获取用户角色下的权限成功', 200);
         } catch (\Throwable $t) {
@@ -254,11 +253,16 @@ class RolePermissionService extends BaseService
         }
     }
 
+    /**
+     * 用户是否含有指定角色下的权限
+     * @param $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function userHasPermissionThoughRole($request)
     {
         try {
             //$role = Role::where('id', '=', $request->roleId)->firstOrFail();
-            $user = UserModel::findOrFail($request->uid);
+            $user = $this->userModel::findOrFail($request->uid);
             $res  = $user->hasPermissionTo($request->permission, $request->guardName);
             if ($res) {
                 return $this->response('', '用户拥有该权限', 200);

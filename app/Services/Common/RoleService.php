@@ -11,7 +11,6 @@ namespace App\Services\Common;
 
 use App\Models\RoleModel\RoleModel;
 use App\Services\BaseService;
-use App\Traits\ModelTrait;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 
