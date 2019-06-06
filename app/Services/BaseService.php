@@ -10,15 +10,9 @@ namespace App\Services;
 
 
 use App\Http\Controllers\Common\Controller;
+use App\Traits\ResponseTrait;
 
 class BaseService extends Controller
 {
-    public function response($data,$msg,$code=200){
-        return json_encode([
-            'msg'=>$msg,
-            'code'=>$code,
-            'data'=>$data,
-        ]);
-    }
-
+    use ResponseTrait;
 }
