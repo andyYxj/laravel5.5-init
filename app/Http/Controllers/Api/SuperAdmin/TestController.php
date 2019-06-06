@@ -10,16 +10,26 @@ namespace App\Http\Controllers\Api\SuperAdmin;
 
 
 use App\Http\Controllers\Common\MyController;
-use Illuminate\Support\Facades\Request;
+use App\Services\Common\RolePermissionService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 class TestController extends MyController
 {
-    public function index(Request $request){
+    public $service;
+    public function __construct()
+    {
+       // $this->service = new RolePermissionService();
+    }
 
-        $a=Request::getRequestUri();//完整路由
-        $b=app('router')->getRoutes();//获取所有路由1
-        $c=Route::getRoutes();//获取所有路由2
+    public function index(Request $request)
+    {
+
+        echo 111;
+        die;
+        $a = Request::getRequestUri();//完整路由
+        $b = app('router')->getRoutes();//获取所有路由1
+        $c = Route::getRoutes();//获取所有路由2
 
         // 获取当前路由实例
         $route = Route::current();
@@ -29,5 +39,70 @@ class TestController extends MyController
         $action = Route::currentRouteAction();
         echo $request->getName();
     }
+
+
+
+
+
+    /**
+     * 给一个角色添加一个权限
+     * @param Request $request
+     * @return string
+     */
+    public function attachPermissionToRole(Request $request)
+    {
+        return $this->service->attachPermissionToRole($request);
+    }
+
+
+
+    /**
+     * 给一个角色同步多个权限，会删除原先角色所有的权限，以当前同步的为准
+     * @param Request $request
+     * @return mixed
+     */
+    public function syncPermissionsToRole(Request $request){
+        return $this->service->syncPermissionsToRole($request);
+    }
+
+    /**
+     * 判断一个角色是否有某个权限
+     * @param Request $request
+     */
+    public function roleHasPermission(Request $request){
+        return $this->service->roleHasPermission($request);
+    }
+
+    /**
+     * 给用户关联角色
+     * @param Request $request
+     * @return mixed
+     */
+    public function attachRolesToUser(Request $request)
+    {
+        return $this->service->attachRolesToUser($request);
+    }
+
+    /**
+     * 移除用户的角色
+     * @param Request $request
+     * @return string
+     */
+    public function removeRoleFromUser(Request $request){
+        return $this->service->removeRoleFromUser($request);
+    }
+
+    /**
+     * 判断一个用户是否有某个角色
+     * @param Request $request
+     */
+    public function userHasRole(Request $request){
+        return $this->service->userHasRole($request);
+    }
+
+    //######################用户为主的接口 end##########################
+
+
+
 
 }
