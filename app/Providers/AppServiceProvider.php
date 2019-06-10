@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Helpers\DbDebugHelper;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if ($this->app->environment() !== 'production') {
+            DbDebugHelper::dbDebug();
+        }
     }
 
     /**
@@ -23,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       /* if ($this->app->environment() !== 'production') {
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-        }*/
+        /* if ($this->app->environment() !== 'production') {
+             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+         }*/
     }
 }
